@@ -1,0 +1,4 @@
+packages:
+  - "apps/workspace"
+  - "apps/solution"
+  - "docs"

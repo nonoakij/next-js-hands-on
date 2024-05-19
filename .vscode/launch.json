@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "./docs/node_modules/.bin/astro dev --root ./docs",
+      "name": "docs: start development server",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "name": "solution: attach debugger",
+      "request": "attach",
+      "port": 4002,
+      "type": "node",
+      "cwd": "${workspaceFolder}/apps/solution"
+    },
+    {
+      "name": "workspace: attach debugger",
+      "request": "attach",
+      "port": 3002,
+      "type": "node",
+      "cwd": "${workspaceFolder}/apps/workspace"
+    }
+  ]
+}

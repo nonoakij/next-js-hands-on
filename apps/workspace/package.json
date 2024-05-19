@@ -1,0 +1,36 @@
+{
+  "name": "@next-js-hands-on/workspace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "check": "biome check --apply ./**/*.{ts,tsx}",
+    "dev": "NODE_OPTIONS='--inspect=3001' next dev --port $npm_package_config_port",
+    "format": "biome format --write ./**/*.{ts,tsx}",
+    "lint": "biome lint ./**/*.{ts,tsx}",
+    "start": "next start",
+    "type-check": "tsc"
+  },
+  "config": {
+    "port": 3000
+  },
+  "dependencies": {
+    "class-variance-authority": "0.7.0",
+    "clsx": "2.1.1",
+    "lucide-react": "0.378.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "2.3.0",
+    "tailwindcss-animate": "1.0.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
