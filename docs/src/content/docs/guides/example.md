@@ -3,9 +3,24 @@ title: Example Guide
 description: A guide in my new Starlight docs site.
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+## scripts
 
-## Further reading
+## tab を記録する
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+query に tab を追加する
+
+## middleware で認証情報を確認してナビゲーションする
+
+## parallel routes
+
+## intercept routes
+
+## server action を使う
+
+引数のバリデーション
+
+## 会員限定コンテンツが漏洩していることを確認する
+
+## useDefferedValue で検索の快適にする
+
+## streaming ssr でパフォーマンスを向上させる
