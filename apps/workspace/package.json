@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "check": "biome check --apply ./**/*.{ts,tsx}",
+    "check": "biome check --apply .*",
     "dev": "NODE_OPTIONS='--inspect=3001' next dev --port $npm_package_config_port",
-    "format": "biome format --write ./**/*.{ts,tsx}",
-    "lint": "biome lint ./**/*.{ts,tsx}",
+    "format": "biome format --write ./*",
+    "lint": "biome lint .*",
     "start": "next start",
     "type-check": "tsc"
   },

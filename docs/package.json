@@ -8,9 +8,9 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "biome format --write ./src",
-    "lint": "biome lint ./src",
-    "check": "biome check --apply ./src"
+    "format": "biome format --write ./*",
+    "lint": "biome lint ./*",
+    "check": "biome check -apply ./*"
   },
   "config": {
     "port": 8000

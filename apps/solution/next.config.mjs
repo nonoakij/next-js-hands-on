@@ -5,6 +5,6 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
