@@ -13,7 +13,7 @@
     "check": "biome check -apply ./*"
   },
   "config": {
-    "port": 8000
+    "port": 5000
   },
   "dependencies": {
     "@astrojs/check": "0.7.0",
