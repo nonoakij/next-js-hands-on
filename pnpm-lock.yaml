@@ -48,10 +48,10 @@ importers:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
       react:
-        specifier: ^18
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       react-resizable-panels:
         specifier: 2.0.19
@@ -67,22 +67,22 @@ importers:
         specifier: 1.7.3
         version: 1.7.3
       '@types/node':
-        specifier: ^20
+        specifier: 20.12.12
         version: 20.12.12
       '@types/react':
-        specifier: ^18
+        specifier: 18.3.2
         version: 18.3.2
       '@types/react-dom':
-        specifier: ^18
+        specifier: 18.3.0
         version: 18.3.0
       postcss:
-        specifier: ^8
+        specifier: 8.4.38
         version: 8.4.38
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: ^5
+        specifier: 5.4.5
         version: 5.4.5
 
   apps/workspace:
@@ -100,10 +100,10 @@ importers:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
       react:
-        specifier: ^18
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       tailwind-merge:
         specifier: 2.3.0
@@ -116,40 +116,40 @@ importers:
         specifier: 1.7.3
         version: 1.7.3
       '@types/node':
-        specifier: ^20
+        specifier: 20.12.12
         version: 20.12.12
       '@types/react':
-        specifier: ^18
+        specifier: 18.3.2
         version: 18.3.2
       '@types/react-dom':
-        specifier: ^18
+        specifier: 18.3.0
         version: 18.3.0
       postcss:
-        specifier: ^8
+        specifier: 8.4.38
         version: 8.4.38
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: ^5
+        specifier: 5.4.5
         version: 5.4.5
 
   docs:
     dependencies:
       '@astrojs/check':
-        specifier: ^0.7.0
+        specifier: 0.7.0
         version: 0.7.0(typescript@5.4.5)
       '@astrojs/starlight':
-        specifier: ^0.23.1
+        specifier: 0.23.1
         version: 0.23.1(astro@4.8.6)
       astro:
-        specifier: ^4.8.6
+        specifier: 4.8.6
         version: 4.8.6(typescript@5.4.5)
       sharp:
-        specifier: ^0.32.5
-        version: 0.32.6
+        specifier: 0.32.5
+        version: 0.32.5
       typescript:
-        specifier: ^5.4.5
+        specifier: 5.4.5
         version: 5.4.5
     devDependencies:
       '@biomejs/biome':
@@ -5251,8 +5251,8 @@ packages:
     hasBin: true
     dev: false
 
-  /sharp@0.32.6:
-    resolution: {integrity: sha512-KyLTWwgcR9Oe4d9HwCwNM2l7+J0dUQwn/yf7S0EnTtb0eVS4RxO0eUSvxPtzT4F3SY+C4K6fqdv/DO27sJ/v/w==}
+  /sharp@0.32.5:
+    resolution: {integrity: sha512-0dap3iysgDkNaPOaOL4X/0akdu0ma62GcdC2NBQ+93eqpePdDdr2/LM0sFdDSMmN7yS+odyZtPsb7tx/cYBKnQ==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
