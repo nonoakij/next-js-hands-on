@@ -1,20 +1,18 @@
 import { MailViewer } from "@/components/mail-viewer";
-import { mailListData } from "@/lib/mock-data";
+import type { MailData } from "@/lib/types";
 
-export default function InboxDetailsPage(props: {
+export default async function InboxDetailsPage(props: {
   params: {
     id: string;
   };
 }) {
-  const mail = mailListData.find((mail) => mail.id === props.params.id);
-
-  if (!mail) {
-    return <div>Mail not found</div>;
-  }
+  const res = (await fetch(`http://localhost:8000/inbox/${props.params.id}`, {
+    cache: "no-cache",
+  }).then((res) => res.json())) as MailData;
 
   return (
     <div className="h-dvh">
-      <MailViewer mail={mail} />
+      <MailViewer mail={res} />
     </div>
   );
 }

@@ -1,18 +1,13 @@
 import { MailViewer } from "@/components/mail-viewer";
-import { mailListData } from "@/lib/mock-data";
+import type { MailData } from "@/lib/types";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function QuickMailViewModal(props: {
   params: {
     id: string;
   };
 }) {
-  const mail = mailListData.find((mail) => mail.id === props.params.id);
-
-  if (!mail) {
-    return <div>Mail not found</div>;
-  }
-
   return (
     <>
       <Link
@@ -20,8 +15,20 @@ export default function QuickMailViewModal(props: {
         href="/inbox"
       />
       <div className="absolute right-0 top-0 bottom-0 m-auto bg-white border rounded-l-lg w-3/5 z-modal">
-        <MailViewer mail={mail} />
+        <Suspense
+          fallback={<div className="text-center mt-10">Loading...</div>}
+        >
+          <Mail id={props.params.id} />
+        </Suspense>
       </div>
     </>
   );
+}
+
+async function Mail(props: { id: string }) {
+  const res = (await fetch(`http://localhost:8000/inbox/${props.id}`, {
+    cache: "no-cache",
+  }).then((res) => res.json())) as MailData;
+
+  return <MailViewer mail={res} />;
 }
