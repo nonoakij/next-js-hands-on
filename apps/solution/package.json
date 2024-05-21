@@ -31,10 +31,10 @@
     "react-dom": "18.3.1",
     "react-resizable-panels": "2.0.19",
     "tailwind-merge": "2.3.0",
-    "tailwindcss-animate": "1.0.7"
+    "tailwindcss-animate": "1.0.7",
+    "zod": "3.23.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.3",
     "@types/node": "20.12.12",
     "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",

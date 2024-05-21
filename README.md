@@ -1,6 +1,22 @@
 # Next.js Hands-on
 
-## 🛠️ Setup
+## このリポジトリについて
+
+このリポジトリは、Next.js を使った開発を学ぶためのハンズオンです。
+対象者は、Next.js において、公式の Learn を読んでいることを前提としています。(ドキュメントについては詳しく読了している必要はありません。)
+
+## 構成
+
+モノレポの構成になっています。
+大きく4つパッケージで構成されています。
+
+- `apps/solution` : 今回のハンズオンの完成した時の実装があります。このパッケージは、参考用です。
+- `apps/workspace` : 今回のハンズオンで作業するパッケージです。主にこのパッケージを編集していきます。
+- `docs` : 今回のハンズオンの進め方が書かれています。
+- `backend` : Backend の実装です。今回のハンズオンでは、このパッケージを編集することはありません。
+
+
+## セットアップ
 
 ### このリポジトリをクローンしてください。
 
@@ -55,11 +71,33 @@ pnpm install
 ### 開発サーバーを起動してください
 
 ``` bash
-pnpm dev
+pnpm run dev
 ```
 
-### ブラウザで以下の URL にアクセスしてください
+### ブラウザで以下の URL にアクセスできることを確認してください
 
-- 今回のHands-onで作業するworkspaceのURLです [http:localhost:3000](http:localhost:3000)
-- 今回のHands-onでの完成した時のURLです [http:localhost:4000](http:localhost:4000)
+- 今回のHands-onで作業するサイトのURLです [http:localhost:3000](http:localhost:3000)
+- 今回のHands-onの目標のサイトのURLです [http:localhost:4000](http:localhost:4000)
 - Hands-onの進め方が書いています[http:localhost:5000](http:localhost:5000)
+- Backend Server のURLです[http:localhost:8000](http:localhost:8000)
+
+## これで準備は完了です
+
+Hands-onを進めていきましょう！
+
+進め方については、Github Pages でホスティングされているDocumentを参照してください。
+
+[https://nonoakij.github.io/next-js-hands-on/](https://nonoakij.github.io/next-js-hands-on/)
+
+## scripts　一覧
+
+script | description
+--- | ---
+`pnpm run dev` | 開発サーバーを起動します
+`pnpm run dev:workspace` | 開発サーバーを起動します
+`pnpm run build` | ビルドします
+`pnpm run start` | ビルドしたアプリケーションを起動します
+`pnpm run lint` | lint を実行します
+`pnpm run format` | format を実行します
+`pnpm run check` | lint と format を実行します
+`pnpm run type-check` | 型チェックを実行します

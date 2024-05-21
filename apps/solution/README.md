@@ -1,1 +1,1 @@
-# Next.js Hands-on
+# Next.js Hands-on Solution

@@ -1,15 +1,11 @@
-import { signIn } from "@/app/actions";
-import { Button } from "@/components/ui/button";
+import { LoginForm } from "@/app/components/login-form";
+import { SignInForm } from "@/app/components/sign-in-form";
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home(props: {
@@ -30,32 +26,14 @@ export default function Home(props: {
           </TabsList>
           <TabsContent value="sign-up">
             <Card>
-              <form action={signIn}>
-                <CardHeader>
-                  <CardTitle>Sign-up</CardTitle>
-                  <CardDescription>
-                    アカウントを作成して、今すぐ The Joke Mail Service
-                    をご利用ください！
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="matsumoto_aki@example.com"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password" />
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button>登録する</Button>
-                </CardFooter>
-              </form>
+              <CardHeader>
+                <CardTitle>Sign-up</CardTitle>
+                <CardDescription>
+                  アカウントを作成して、今すぐ The Joke Mail Service
+                  をご利用ください！
+                </CardDescription>
+              </CardHeader>
+              <SignInForm />
             </Card>
           </TabsContent>
           <TabsContent value="login">
@@ -67,23 +45,7 @@ export default function Home(props: {
                   をご利用の方はこちらからログインしてください！
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="matsumoto_aki@example.com"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button>ログインする</Button>
-              </CardFooter>
+              <LoginForm />
             </Card>
           </TabsContent>
         </Tabs>
