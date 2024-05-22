@@ -1,5 +1,5 @@
 import { LoginForm } from "@/app/components/login-form";
-import { SignInForm } from "@/app/components/sign-in-form";
+import { SignUpForm } from "@/app/components/sign-up-form";
 import {
   Card,
   CardDescription,
@@ -32,7 +32,7 @@ export default function Home(props: {
                   をご利用ください！
                 </CardDescription>
               </CardHeader>
-              <SignInForm />
+              <SignUpForm />
             </Card>
           </TabsContent>
           <TabsContent value="login">

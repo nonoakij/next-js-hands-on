@@ -231,7 +231,7 @@ import { redirect } from "next/navigation";
 +     Object.fromEntries(formData.entries()),
 +   );
 +   if (!parsedFormData.success) {
-+     throw new Error("Invalid form data", { cause:  parsedFormData.error })
++     throw new Error("Invalid form data", { cause:  parsedFormData.error });
 +   }
 + 
 +   const { email, password } = parsedFormData.data;

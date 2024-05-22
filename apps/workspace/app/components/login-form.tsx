@@ -22,7 +22,7 @@ export function LoginForm() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button>登録する</Button>
+        <Button>ログインする</Button>
       </CardFooter>
     </form>
   );
