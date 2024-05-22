@@ -66,6 +66,8 @@ import { Label } from "@/components/ui/label";
 
 ```diff lang="tsx"
 // apps/workspace/components/ui/tabs.tsx
+...
+
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -109,6 +111,7 @@ const TabsTrigger = React.forwardRef<
   );
 });
 
+...
 ```
 
 これで、タブの状態をURLに持たせることができました。

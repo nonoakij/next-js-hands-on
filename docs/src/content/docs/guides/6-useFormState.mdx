@@ -1,47 +1,18 @@
 ---
-title: 5. Server Action の引数のvalidation
-description: 4. Server Action の引数のvalidation
+title: 6. 画面にエラーの情報を表示する
+description: 6. 画面にエラーの情報を表示する
 ---
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Aside } from '@astrojs/starlight/components';
-import videoSrc from '../../assets/first-page.mov';
-
 ```diff lang="tsx"
 // apps/workspace/app/actions.ts
-"use server";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-+ import { type inferFlattenedErrors, z } from "zod";
 
-+ const authSchema = z.object({
-+   email: z.string().email(),
-+   password: z.string().min(1),
-+ });
+const authSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
+});
 + type State = inferFlattenedErrors<typeof authSchema> | null;
 
 - export async function auth(formData: FormData) {
--   const email = formData.get("email") as string;
--   const password = formData.get("password") as string;
 + export async function auth(state: State, formData: FormData): Promise<State> {
-+   const parsedFormData = authSchema.safeParse(
-+     Object.fromEntries(formData.entries()),
-+   );
-+   if (!parsedFormData.success) {
-+     return parsedFormData.error.formErrors;
-+   }
-+ 
-+   const { email, password } = parsedFormData.data;
-  const response = await fetch("http://localhost:8000/auth", {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
 ```
 
 ```diff lang="tsx"
@@ -83,9 +54,3 @@ export function SignInForm() {
   );
 }
 ```
-
-## なぜバリデーションが必要なのか？
-
-## 参考リンク
-
-- Next.js v14 で Form validation を server 側で行う https://cam-inc.co.jp/p/techblog/859745503506595841
