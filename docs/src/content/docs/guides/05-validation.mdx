@@ -94,15 +94,11 @@ import { SignInForm } from "@/app/components/sign-in-form";
 
 2. network タブを開きます
 
-3. filter アイコンをクリックします
+3. 画面の`足し算する`ボタンをクリックします
 
-4. Fetch/XHR を選択します
+4. reqeust を確認します
 
-5. 画面の`足し算する`ボタンをクリックします
-
-6. reqeust を確認します
-
-7. curl としてコピーします
+5. curl としてコピーします
 
 </Steps>
 
@@ -137,7 +133,7 @@ curl 'http://localhost:3000/' \
 1:"12"
 ```
 
-`1:"12"` となりました。文字列としての `1` と `2` が連結されてしまっています。
+`1:"12"` となりました。文字列としての `1` と `2` を送った結果、`"1" + "2"`の結果として、`"12"` が返ってきました。
 
 あらためて、sum の 引数を確認してみましょう。
 ```tsx
@@ -147,11 +143,15 @@ export async function sum(a: number, b: number) {
 }
 ```
 
-実装上はnumber型ですが、今回のように何らかの方法で直接リクエストを送信する場合、実行時には型情報が失われてしまいますのでクライアントが好きな値を送信することができます。
+実装上はnumber型ですが、実際にはクライアントから好きな値を送信することができます。
+
+(typescript はただの静的な型の確認をしているだけで、validationなどは行いません。)
 
 今回は文字列が連結されてしまうだけでしたが、ここで DB にアクセスするなどの処理を行っていた場合、セキュリティリスクが発生する可能性があります。
 
 このことから、引数のバリデーションが重要であることがわかります。
+
+
 <Aside type="tip">
 Server Action のリクエストは全て、`POST` メソッドで行われます。
 リクエスト先は全て現在のページの URL になります。
@@ -261,12 +261,18 @@ import { redirect } from "next/navigation";
 
 次は、画面にエラーメッセージを表示するように変更していきましょう。
 
+<Aside type="tip">
+  有名なバリデーションライブラリとしては、`zod` の他にも `valibot`, `yup`, `Joi` などがあります。
+</Aside>
+
 
 ## まとめ
 
 今回は、Server Action で引数のバリデーションを行う方法を学びました。
+
 Server Action で受け取る引数は、かならずバリデーションを行うようにしましょう。
 
 ## 参考リンク
 
-- Next.js v14 で Form validation を server 側で行う https://cam-inc.co.jp/p/techblog/859745503506595841
+- Next.js v14 で Form validation を server 側で行う
+  https://cam-inc.co.jp/p/techblog/859745503506595841

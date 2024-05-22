@@ -143,12 +143,14 @@ export function SignInForm() {
 ```
 
 これで、`useFormState` を利用して、簡潔に書くことができました。
+
 `useFormState` の第一引数には、action を、第二引数にはStateの初期値をとります。
 第一引数の action の第一引数には、現在のStateを受け取り、第二引数には、formのデータを受け取ります。
+
 例えば、下記のように書くことができます。
 
 ```tsx
-const [state, formAction] = useFormState(async (state, formData) => {
+const [state, formAction] = useFormState((state, formData) => {
   // 本当はバリデーションしたほうがいいですが、省略
   const count = formData.get('count')
   return count + state
@@ -158,14 +160,20 @@ const [state, formAction] = useFormState(async (state, formData) => {
 このため、action.ts を変更したというわけです。
 
 <Aside type="tip">
-  useFormState は、useActionState に置き換わることになりました。
-  この Hands-on 作成時点では、Next.jsでの利用はまだサポートされていないため、useFormState を利用しています。
-  useActionState が利用可能になった際には、そちらを利用することをお勧めします。
+  `useFormState` は、`useActionState` に置き換わることになりました。
+
+  この Hands-on 作成時点では、Next.jsでの利用はまだサポートされていないため、`useFormState` を利用しています。
+  `useActionState` が利用可能になった際には、そちらを利用することをお勧めします。
+  そのまま置き換えられるはずです。
+
   https://github.com/facebook/react/pull/28491
 </Aside>
 <Aside type="tip">
   useFormState と似ているものに useFormStatus があります。
+  useFormStatus は、action の実行状況を取得することができます。
+
   詳細はこちらを参照してください。
+
   https://ja.react.dev/reference/react-dom/hooks/useFormStatus
 </Aside>
 
