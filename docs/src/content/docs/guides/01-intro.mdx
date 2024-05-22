@@ -16,7 +16,7 @@ import { Aside } from '@astrojs/starlight/components';
 
 このリポジトリはモノレポになっており、以下のディレクトリ構成で構成されています。
 
-```
+``` bash 
 next-js-hands-on/
 ├── README.md
 ├── apps
@@ -24,23 +24,24 @@ next-js-hands-on/
 │   └── workspace
 ├── backend
 ├── docs
+├── package.json
 ├── biome.json
 ├── lefthook.yml
-├── package.json
 ├── pnpm-lock.yaml
 └── pnpm-workspace.yaml
 ```
 
 モノレポとは、複数のプロジェクトを 1 つのリポジトリで管理する方法です。
-詳しいメリットなどは割愛しますが、モノレポ構成にすることでアプリケーションのコードや設定を共有することができます。
+詳しいメリットなどは割愛しますが、モノレポ構成にすることでアプリケーションのコードや設定をリポジトリないの他のパッケージ（アプリケーション）と共有することができます。
 
 パッケージマネージャーには、`pnpm` を使用しています。
 `pnpm` は、`npm` や `yarn` と同様にパッケージの管理を行うツールですが、`pnpm` はハードリンクを利用することで、ディスク容量を節約できるという特徴があります。
-また、`pnpm` は、一般的に `npm` や `yarn` よりも高速にパッケージのインストールができると言われています。
+一般的に `npm` や `yarn` よりも`pnpm`の方が高速にパッケージのインストールができると言われています。
 
 また、Linter と Formatter として、`Biome` を使用しています。
-`Biome` は、比較的新しいツールで、ESLint や Prettier などの Linter や Formatter を統合したツールです。
-採用理由は、ESLint と Prettier を組み合わせる際に発生する設定の競合の解消などが不要で設定が楽なのであるため採用しました。
+`Biome` は、比較的新しいツールで、ESLint や Prettier などで代表されるの Linter や Formatter の機能を一つに統合したツールです。
+ESLint と Prettier を組み合わせる際に一部の機能が競合しますが、`Biome` ではそのような競合を解消する必要がありません。
+よって、簡単に設定が完了するので今回は採用しました。
 
 <Aside type="tip">
 元々は、Rome という名前でしたが、色々あって今は Biome という名前で開発が進められています。
@@ -53,7 +54,7 @@ commit や push を hook して、lint と format を実行するようにして
 ## パッケージの紹介
 改めて、リポジトリの構成を確認しましょう。
 
-```
+``` bash "solution" /workspace$/ "backend" "docs"
 next-js-hands-on/
 ├── README.md
 ├── apps

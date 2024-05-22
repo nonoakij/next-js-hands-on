@@ -35,7 +35,6 @@ import videoSrc from '../../assets/first-page.mov';
 // apps/workspace/app/page.tsx
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-+ import { useFormState } from "react-dom";
 
 - export default function Home() {
 + export default function Home(props: {
@@ -50,16 +49,16 @@ import { Label } from "@/components/ui/label";
   export default function Home(props: {
     searchParams: Record<string, string | string[] | undefined>;
   }) {
-+   const tabsValue = props.searchParams.tab === "login" ? "login" : "sign-up";
++   const tabValue = props.searchParams.tab === "login" ? "login" : "sign-up";
    return (
 ```
 
-次に、`Tabs`コンポーネントに`value`を渡します。
+次に、`Tabs`コンポーネントに`tabValue`を渡します。
 
 ```diff lang="tsx"
 // apps/workspace/app/page.tsx
 - <Tabs defaultValue="sign-up" className="w-[400px]">
-+ <Tabs value={tabsValue} className="w-[400px]">
++ <Tabs value={tabValue} className="w-[400px]">
 ```
 
 そして、`TabsTrigger`コンポーネントに`onClick`を追加して、タブの更新時にqueryを更新するようにします。
@@ -121,5 +120,7 @@ const TabsTrigger = React.forwardRef<
 ## まとめ
 
 今回は、タブの状態をURLに持たせる方法を学びました。
+
 これで、ブラウザのリロードやリンクをクリックした際にもタブの状態を保持することができるようになりました。
+
 これを応用することで、モーダルを開いた状態のリンクを共有するなど、様々な用途に活用することができます。
