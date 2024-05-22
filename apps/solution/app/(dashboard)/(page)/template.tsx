@@ -5,7 +5,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { Archive, ArchiveX, File, Inbox, Send, Trash2 } from "lucide-react";
+import { File, Inbox, Send } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
