@@ -2,8 +2,6 @@
 title: 3. tabの状態をqueryに持たせる
 description: 2. tabの状態をqueryに持たせる
 ---
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Aside } from '@astrojs/starlight/components';
 import videoSrc from '../../assets/first-page.mov';
 
 ## tabの状態をqueryに持たせる
@@ -35,6 +33,10 @@ import videoSrc from '../../assets/first-page.mov';
 
 ```diff lang="tsx"
 // apps/workspace/app/page.tsx
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
++ import { useFormState } from "react-dom";
+
 - export default function Home() {
 + export default function Home(props: {
 +   searchParams: Record<string, string | string[] | undefined>;
@@ -63,6 +65,7 @@ import videoSrc from '../../assets/first-page.mov';
 そして、`TabsTrigger`コンポーネントに`onClick`を追加して、タブの更新時にqueryを更新するようにします。
 
 ```diff lang="tsx"
+// apps/workspace/components/ui/tabs.tsx
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -111,3 +114,9 @@ const TabsTrigger = React.forwardRef<
 これで、タブの状態をURLに持たせることができました。
 改めて、タブを`Login`に切り替えてからリロードしてみてください。
 `Login`のままになっているはずです。
+
+## まとめ
+
+今回は、タブの状態をURLに持たせる方法を学びました。
+これで、ブラウザのリロードやリンクをクリックした際にもタブの状態を保持することができるようになりました。
+これを応用することで、モーダルを開いた状態のリンクを共有するなど、様々な用途に活用することができます。

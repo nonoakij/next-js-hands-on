@@ -1,0 +1,127 @@
+---
+title: 4. Server Action を使って認証する
+description: 4. Server Action を使って認証する
+---
+import { Aside } from '@astrojs/starlight/components';
+
+## Sign-upできるようにする
+
+Sign-upを実装していきます。
+
+## 現状の確認
+
+現在は、Sign-up機能が実装されていません。
+これから、Server Action を使って Sign-up 機能を実装していきます。
+
+## Server Action の簡単な説明
+
+Server Actions とは、クライアントから呼び出し可能なサーバーで実行される関数のことです。
+
+'use server' という目標を持つ関数を定義することで、Server Action として定義することができます。
+
+```tsx
+async function requestUsername(formData) {
+  'use server';
+  const username = formData.get('username');
+  // ...
+}
+
+export default function App() {
+  return (
+    <form action={requestUsername}>
+      <input type="text" name="username" />
+      <button type="submit">Request</button>
+    </form>
+  );
+}
+```
+
+上記でいうと、`requestUsername` は Server Action として定義されています。
+一見すると、通常の関数と変わらず、クライアントで実行されそうですが、実際には form submit された際にブラウザから POST リクエストが送信され、サーバーで実行されます。
+
+typescript で実装している場合は型の情報を取ることができるため、tRPC などのライブラリと組み合わせることなく、型安全なコードを書くことができます。
+
+## Server Action を使って Sign-up 機能を実装する
+
+まずは、Sign-up 用の Server Action を定義します。
+`apps/workspace/app/actions.ts` を以下のように変更してください。
+
+```tsx
+// apps/workspace/app/actions.ts
+"use server";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
+export async function auth(formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  const response = await fetch("http://localhost:8000/auth", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+  if (response.ok) {
+    const result = await response.json();
+    cookies().set("___Host-auth", result.message);
+    redirect("/inbox");
+  }
+  return null;
+}
+```
+
+次に、`apps/workspace/app/pages/sign-up.tsx` を以下のように変更してください。
+
+```diff lang="tsx"
+// apps/workspace/app/pages/sign-up.tsx
++ import { auth } from "@/app/actions";
+import { Button } from "@/components/ui/button";
+import { CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+export function SignInForm() {
+  return (
+-     <form>
++     <form action={auth}>
+      <CardContent className="space-y-2">
+```
+
+action に `auth` を指定することで、Server Action として実行されるようになります。
+これで、Sign-up 機能が実装されました。
+
+email と password を入力して Sign-up ボタンをクリックすると、サーバーにリクエストが送信され、Sign-up が完了して `/inbox` にリダイレクトされます。
+
+<Aside>
+  email は サーバー側で簡単なバリデーションを実装しているので、`foo@example`のような値ではエラーになります。
+
+  `foo@example.com`のような値を入力してください。
+
+  password は 1文字以上であれば問題ありません。
+</Aside>
+
+## Advanced
+
+login 機能も同様に Server Action を使って実装することができます。
+
+`apps/workspace/app/components/login-form.tsx` の form action に auth 関数 (server action) を指定してみましょう。
+
+
+## まとめ
+
+Server Action を使って Sign-up 機能を実装しました。
+
+Server Action を使うことで、簡単にサーバー側に通信して何かを実行することができます。
+
+また、typescript を使っている場合は、型情報を取ることができるため、型安全なコードを書くことができます。
+
+## 参考リンク
+
+- React Docs https://ja.react.dev/reference/rsc/use-server
+- Next.js Docs https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations
