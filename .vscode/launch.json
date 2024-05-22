@@ -2,8 +2,8 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "./docs/node_modules/.bin/astro dev --root ./docs",
       "name": "docs: start development server",
+      "command": "./docs/node_modules/.bin/astro dev --root ./docs",
       "request": "launch",
       "type": "node-terminal"
     },
@@ -20,6 +20,16 @@
       "port": 3002,
       "type": "node",
       "cwd": "${workspaceFolder}/apps/workspace"
+    },
+    {
+      "name": "backend: attach debugger",
+      "type": "node",
+      "request": "attach",
+      "port": 8001,
+      "cwd": "${workspaceFolder}/backend/src",
+      "resolveSourceMapLocations": null,
+      "attachExistingChildren": false,
+      "autoAttachChildProcesses": false
     }
   ]
 }
