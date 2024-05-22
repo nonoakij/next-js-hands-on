@@ -78,7 +78,7 @@ pnpm run dev
 
 - 今回のHands-onで作業するサイトのURLです [http:localhost:3000](http:localhost:3000)
 - 今回のHands-onの目標のサイトのURLです [http:localhost:4000](http:localhost:4000)
-- Hands-onの進め方が書いています[http:localhost:5000](http:localhost:5000)
+- Hands-onの進め方が書いています[http:localhost:5050](http:localhost:5050)
 - Backend Server のURLです[http:localhost:8000](http:localhost:8000)
 
 ## これで準備は完了です
@@ -93,8 +93,12 @@ Hands-onを進めていきましょう！
 
 script | description
 --- | ---
-`pnpm run dev` | 開発サーバーを起動します
-`pnpm run dev:workspace` | 開発サーバーを起動します
+`pnpm run dev` | すべてを起動します
+`pnpm run dev:workspace` | workspaceのみを起動します
+`pnpm run dev:solution` | solutionのみを起動します
+`pnpm run dev:docs` | docsのみを起動します
+`pnpm run dev:backend` | backendのみを起動します
+`pnpm run hands-on` | workspace と backend を起動します
 `pnpm run build` | ビルドします
 `pnpm run start` | ビルドしたアプリケーションを起動します
 `pnpm run lint` | lint を実行します

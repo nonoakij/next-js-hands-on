@@ -2,6 +2,105 @@
 title: 2. はじめる
 description: 2. はじめる
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 
 ## インストール
+
+
+### リポジトリをクローンする
+
+以下のいずれかの方法でリポジトリをクローンしてください。
+
+<Tabs syncKey="constellations">
+  <TabItem label="https">
+    ``` bash
+    git clone https://github.com/nonoakij/next-js-hands-on.git
+    ```
+  </TabItem>
+  <TabItem label="ssh">
+    ``` bash
+    git clone git@github.com:nonoakij/next-js-hands-on.git
+    ```
+  </TabItem>
+  <TabItem label="gh">
+    ``` bash
+    gh repo clone nonoakij/next-js-hands-on
+    ```
+  </TabItem>
+</Tabs>
+
+### プロジェクトディレクトリに移動する
+
+``` bash
+cd next-js-hands-on
+```
+
+### 依存関係をインストールする
+
+``` bash
+pnpm install
+```
+
+<Aside type="tip">
+`pnpm` をインストールしていない場合は、以下のコマンドでインストールしてください。
+
+<Tabs syncKey="constellations">
+  <TabItem label="brew">
+    ``` bash
+    brew install pnpm
+    ```
+  </TabItem>
+  <TabItem label="npm">
+    ``` bash
+    npm install -g pnpm
+    ```
+  </TabItem>
+    <TabItem label="Corepack">
+    ``` bash
+    corepack enable pnpm
+    ```
+    Homebrew を使用して Node.js をインストールした場合は、Corepack を個別にインストールする必要があります。
+
+    ``` bash
+    brew install corepack
+    ```
+  </TabItem>
+</Tabs>
+
+その他のインストール方法は、[pnpm 公式サイト](https://pnpm.io/ja/installation)を参照してください。
+</Aside>
+
+### 開発サーバーを起動する
+
+``` bash
+pnpm run dev
+```
+
+### ブラウザで以下の URL にアクセスできることを確認してください
+
+- workspace `http:localhost:3000`
+- solution `http:localhost:4000`
+- docs `http:localhost:5050/next-js-hands-on`
+- backend `http:localhost:8000`
+
+## これで準備は完了です
+
+Hands-onを進めていきましょう！
+
+## scripts
+
+script | description
+--- | ---
+`pnpm run dev` | すべてを起動します
+`pnpm run dev:workspace` | workspaceのみを起動します
+`pnpm run dev:solution` | solutionのみを起動します
+`pnpm run dev:docs` | docsのみを起動します
+`pnpm run dev:backend` | backendのみを起動します
+`pnpm run hands-on` | workspace と backend を起動します
+`pnpm run build` | ビルドします
+`pnpm run start` | ビルドしたアプリケーションを起動します
+`pnpm run lint` | lint を実行します
+`pnpm run format` | format を実行します
+`pnpm run check` | lint と format を実行します
+`pnpm run type-check` | 型チェックを実行します
