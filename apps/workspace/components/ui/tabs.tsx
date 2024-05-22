@@ -28,30 +28,6 @@ const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, value, onClick, ...props }, ref) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams],
-  );
-
-  const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      const query = createQueryString("tab", value);
-      router.push(`${pathname}?${query}`);
-      onClick?.(event);
-    },
-    [createQueryString, pathname, value, router, onClick],
-  );
-
   return (
     <TabsPrimitive.Trigger
       ref={ref}
@@ -60,7 +36,6 @@ const TabsTrigger = React.forwardRef<
         className,
       )}
       value={value}
-      onClick={handleClick}
       {...props}
     />
   );

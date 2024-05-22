@@ -11,15 +11,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function Home(props: {
   searchParams: Record<string, string | string[] | undefined>;
 }) {
-  const defaultTabsValue =
-    props.searchParams.tab === "login" ? "login" : "sign-up";
+  const tabsValue = props.searchParams.tab === "login" ? "login" : "sign-up";
   return (
     <main className="h-dvh p-8">
       <h1 className="text-4xl font-extrabold tracking-tight">
         The Joke Mail Service
       </h1>
       <div className="h-full grid place-content-center">
-        <Tabs defaultValue={defaultTabsValue} className="w-[400px]">
+        <Tabs defaultValue={tabsValue} className="w-[400px]">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="sign-up">Sign-up</TabsTrigger>
             <TabsTrigger value="login">Login</TabsTrigger>

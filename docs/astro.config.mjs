@@ -16,6 +16,27 @@ export default defineConfig({
           label: "Guides",
           autogenerate: { directory: "guides" },
         },
+        {
+          label: "Reference",
+          autogenerate: { directory: "reference" },
+        },
+        {
+          label: "External-links",
+          items: [
+            {
+              label: "Next.js",
+              link: "https://nextjs.org",
+            },
+            {
+              label: "pnpm",
+              link: "https://pnpm.io",
+            },
+            {
+              label: "Biome",
+              link: "https://biome.sh",
+            },
+          ],
+        },
       ],
     }),
   ],
