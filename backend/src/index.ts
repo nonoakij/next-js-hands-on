@@ -27,7 +27,6 @@ app
   })
   .get("/inbox", async (c) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
     const searchQuery = c.req.query("search");
     console.log("searchQuery:", searchQuery);
     let searchResult: MailListData = [];

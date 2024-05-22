@@ -26,7 +26,7 @@ export function MailList(props: { mailList: MailListData }) {
         />
       </div>
       <ScrollArea className="h-full mt-4">
-        <div className="flex flex-col gap-2">
+        <div className="space-y-2">
           <SlowSearchResult
             searchText={deferredSearchText}
             mailList={props.mailList}

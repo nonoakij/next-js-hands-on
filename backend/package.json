@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "wrangler dev --minify  src/index.ts --port 8000",
+    "dev": "NODE_OPTIONS='--inspect=8001' wrangler dev --minify  src/index.ts --port 8000",
     "start": "wrangler start src/index.ts"
   },
   "dependencies": {
