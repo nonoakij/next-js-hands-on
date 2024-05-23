@@ -13,8 +13,6 @@ import { redirect } from "next/navigation";
 
 export default function dashboardLayout(props: {
   children: React.ReactNode;
-  header: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   const cookieStore = cookies();
   const isAuth = cookieStore.get("___Host-auth");
@@ -71,7 +69,6 @@ export default function dashboardLayout(props: {
           </ResizablePanelGroup>
         </section>
       </div>
-      {props.modal}
     </main>
   );
 }

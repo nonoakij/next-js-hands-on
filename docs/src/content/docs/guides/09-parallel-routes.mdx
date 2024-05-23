@@ -1,10 +1,53 @@
 ---
-title: 9. parallel routes を利用して、page を分割する
-description: 9. parallel routes を利用して、page を分割する
+title: 9. parallel routes
+description: 9. parallel routes を利用して、Page ごとに Headder を変更する
 sidebar:
   badge:
     text: TODO
     variant: caution
 ---
 
-##
+## Page ごとに Headder を変更する
+
+下記のように、Page ごとに Header を変更できるようにしてみましょう。
+
+|inbox|draft|
+|---|---|
+![inbox](../../assets/parallel-routes-header-inbox.png)|![draft](../../assets/parallel-routes-header-drafts.png)
+
+今回は、parallel routes を利用して、Page ごとに Header を変更する方法を紹介します。
+
+## 実装する
+
+
+`apps/workspace/app/(dashboard)/layout.tsx` を下記のように変更します
+
+```diff format="tsx"
+// apps/workspace/app/(dashboard)/layout.tsx
+export default function dashboardLayout(props: {
+  children: React.ReactNode;
++  header: React.ReactNode;
+}) {
+   return (
+    <main className="relative">
+      <div className="p-8 h-dvh">
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl font-extrabold tracking-tight">
++            {props.header}
+          </h1>
+          <form action={logout}>
+```
+
+次に、`apps/workspace/app/(dashboard)/@header/inbox/page.tsx`を新規で作成します。
+  
+```bash
+touch apps/workspace/app/(dashboard)/@header/inbox/page.tsx
+```
+
+```tsx
+export default function Header() {
+  return "The Joke Mail Service | Inbox";
+}
+```
+
+この時点で、`http://localhost:3000/inbox` にアクセスすると、Header が `The Joke Mail Service | Inbox` に変更されます。
