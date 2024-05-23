@@ -1,4 +1,4 @@
-import { MailList } from "@/app/(dashboard)/(page)/inbox/components/mail-list";
+import { MailList } from "@/app/(dashboard)/inbox/components/mail-list";
 import type { MailListData } from "@/lib/types";
 import type { Metadata } from "next";
 import { Suspense } from "react";
