@@ -67,3 +67,20 @@ export default function Header() {
 
 これで、`http://localhost:3000/drafts` にアクセスしても、404が表示されなくなったと思います。
 
+ここで「すべてのページに追加しなければならないのか？」と思うかもしれません。
+
+実は、存在しないPageにアクセスした場合のために、`default.tsx` をつかって、デフォルトのHeaderを表示することができます。
+
+実際に`default.tsx` を作成してみましょう。
+
+```bash
+touch apps/workspace/app/(dashboard)/@header/default.tsx
+```
+
+```tsx
+export default function Header() {
+  return "The Joke Mail Service";
+}
+```
+
+これで、`http://localhost:3000/sent`にアクセスした場合には、`The Joke Mail Service` が表示されるようになっていると思います。
