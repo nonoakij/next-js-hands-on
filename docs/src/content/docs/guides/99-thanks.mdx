@@ -1,0 +1,38 @@
+---
+title: 99. 最後に
+description: 99. 最後に
+sidebar:
+  badge:
+    text: TODO
+    variant: caution
+---
+// TODO: このページはまだ作成中です。
+
+## cacheの話はしていません。なぜなら変わりそうだから。
+
+[Breaking] Disable automatic fetch caching
+- fetch cache と言ってるので request memoization 周りの話だと思っている。
+コンポーネントでがむしゃらにとってもいい感じに最適化されるぜ！という話がなくなることになる？かも？
+https://github.com/vercel/next.js/pull/66004
+- [Breaking] disable client router cache for page segments
+client側で持っているページのキャッシュがなくなるので、revalidate()してたところがなくせてシンプルになる場所があるかも。
+https://github.com/vercel/next.js/pull/66039
+- [Breaking] Disable automatic static generation for route handlers
+ServeAction使っていることが多いので自分たちにはあまり影響ないかも
+https://github.com/vercel/next.js/pull/65825
+- docs: Update Route Handlers docs for dynamic
+https://github.com/vercel/next.js/pull/66010/files
+
+## 'use client'? 'use server'? 'use memo'?
+'use ***'は境界です。
+'use client'はCCの境界です。
+'use server'はSAの境界です。RSCではない。
+'use memo'はReact compilerの境界です。
+
+## Reactのcanaryはフレームワークレディです。
+
+## route handler について
+
+## template について
+
+# Metadata について
