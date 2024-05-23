@@ -1,17 +1,33 @@
+"use client";
+import { formatEmail } from "@/components/mail-viewer/action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { useAction } from "@/hooks/useAction";
 import type { MailData } from "@/lib/types";
 import { format } from "date-fns";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { type MouseEvent, useState } from "react";
 
-export function MailViewer(props: {
-  mail: MailData;
-}) {
+export function MailViewer(props: { mail: MailData }) {
+  const [reply, setReply] = useState("");
+  const [dispatch, isLoading] = useAction(formatEmail);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const onClickFormat = async (_: MouseEvent<HTMLButtonElement>) => {
+    setErrorMessage(null);
+    try {
+      const data = await dispatch({ message: props.mail.text, reply });
+      setReply(data.corrected_reply);
+    } catch {
+      setErrorMessage("Failed to format email. Please try again.");
+    }
+  };
+
   return (
     <div className="h-full flex flex-col">
       <div className="p-4">
@@ -55,25 +71,41 @@ export function MailViewer(props: {
         </div>
         <Separator className="mt-auto" />
         <div className="p-4">
-          <form>
-            <div className="grid gap-4">
-              <Textarea
-                className="p-4"
-                placeholder={`Reply ${props.mail.name}...`}
-              />
-              <div className="flex items-center">
-                <Label
-                  htmlFor="mute"
-                  className="flex items-center gap-2 text-xs font-normal"
+          <div className="grid gap-4">
+            <Textarea
+              name="reply"
+              className="p-4"
+              placeholder={`Reply ${props.mail.name}...`}
+              value={reply}
+              onChange={(e) => setReply(e.target.value)}
+            />
+            {errorMessage && (
+              <p role="alert" className="text-red-500 text-xs">
+                {errorMessage}
+              </p>
+            )}
+            <div className="flex justify-between items-center">
+              <Label
+                htmlFor="mute"
+                className="flex items-center gap-2 text-xs font-normal"
+              >
+                <Switch id="mute" aria-label="Mute thread" /> Mute this thread
+              </Label>
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  className="ml-auto"
+                  disabled={isLoading}
+                  onClick={onClickFormat}
                 >
-                  <Switch id="mute" aria-label="Mute thread" /> Mute this thread
-                </Label>
+                  {isLoading ? "Formatting..." : "Format"}
+                </Button>
                 <Button size="sm" className="ml-auto">
                   Send
                 </Button>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

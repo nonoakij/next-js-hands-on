@@ -47,6 +47,28 @@ app
       return c.json({ message: "Mail not found" }, 404);
     }
     return c.json(mail);
+  })
+  .post("/email/format", async (c) => {
+    const body = z
+      .object({
+        message: z.string(),
+        reply: z.string(),
+      })
+      .parse(await c.req.json());
+
+    const res = await fetch("http://localhost:5555/format_email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const data = z
+      .object({
+        corrected_reply: z.string(),
+      })
+      .parse(await res.json());
+    return c.json(data);
   });
 
 export default app;
