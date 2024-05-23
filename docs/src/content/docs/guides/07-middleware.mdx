@@ -57,7 +57,7 @@ your suggestions.\\n\\nExcited for the trip! Mia\",\"date\":\"2022-09-10T13:15:0
 まずは、`apps/workspace/app/(detail)/layout.tsx`と`apps/workspace/app/(dashboard)/layout.tsx`の二箇所の`Layout`からリダイレクト処理を削除します。
 
 ```diff fomat="tsx"
-// apps/workspace/app/(dashboard)/layout.tsx
+// `apps/workspace/app/(detail)/layout.tsx`
 -  const cookieStore = cookies()
 -  const isAuth = cookieStore.get("___Host-auth")
 -  if(!isAuth){
