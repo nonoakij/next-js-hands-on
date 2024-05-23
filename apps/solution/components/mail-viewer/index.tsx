@@ -6,18 +6,26 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { useAction } from "@/hooks/useAction";
 import type { MailData } from "@/lib/types";
 import { format } from "date-fns";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { type MouseEvent, useState } from "react";
 
 export function MailViewer(props: { mail: MailData }) {
-  const [reply, setReply] = useState<string>("");
+  const [reply, setReply] = useState("");
+  const [dispatch, isLoading] = useAction(formatEmail);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const onClickFormat = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    const data = await formatEmail(props.mail.text, reply);
-    setReply(data.corrected_reply);
+  const onClickFormat = async (_: MouseEvent<HTMLButtonElement>) => {
+    setErrorMessage(null);
+    try {
+      const data = await dispatch({ message: props.mail.text, reply });
+      setReply(data.corrected_reply);
+    } catch {
+      setErrorMessage("Failed to format email. Please try again.");
+    }
   };
 
   return (
@@ -65,12 +73,17 @@ export function MailViewer(props: { mail: MailData }) {
         <div className="p-4">
           <div className="grid gap-4">
             <Textarea
-              name="message"
+              name="reply"
               className="p-4"
               placeholder={`Reply ${props.mail.name}...`}
               value={reply}
               onChange={(e) => setReply(e.target.value)}
             />
+            {errorMessage && (
+              <p role="alert" className="text-red-500 text-xs">
+                {errorMessage}
+              </p>
+            )}
             <div className="flex justify-between items-center">
               <Label
                 htmlFor="mute"
@@ -79,8 +92,13 @@ export function MailViewer(props: { mail: MailData }) {
                 <Switch id="mute" aria-label="Mute thread" /> Mute this thread
               </Label>
               <div className="flex items-center gap-2">
-                <Button size="sm" className="ml-auto" onClick={onClickFormat}>
-                  Format
+                <Button
+                  size="sm"
+                  className="ml-auto"
+                  disabled={isLoading}
+                  onClick={onClickFormat}
+                >
+                  {isLoading ? "Formatting..." : "Format"}
                 </Button>
                 <Button size="sm" className="ml-auto">
                   Send
