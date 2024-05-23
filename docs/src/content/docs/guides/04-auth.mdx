@@ -98,8 +98,10 @@ action に `auth` を指定することで、Server Action として実行され
 
 email と password を入力して Sign-up ボタンをクリックすると、サーバーにリクエストが送信され、Sign-up が完了して `/inbox` にリダイレクトされます。
 
-<Aside>
-  email は サーバー側で簡単なバリデーションを実装しているので、`foo@example`のような値ではエラーになります。
+<Aside  type="danger">
+  email は バックエンドサーバで簡単なバリデーションを実装しているので、`foo@example`のような値ではエラーになります。
+
+  この時点ではNext.js側で、エラーハンドリングの実装がないためUI上では何も起こりません。
 
   `foo@example.com`のような値を入力してください。
 
