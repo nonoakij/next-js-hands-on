@@ -1,5 +1,5 @@
 "use client";
-import { formatEmail } from "@/app/actions";
+import { formatEmail } from "@/components/mail-viewer/action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
