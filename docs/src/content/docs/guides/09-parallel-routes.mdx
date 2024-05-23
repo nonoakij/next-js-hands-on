@@ -3,6 +3,8 @@ title: 9. parallel routes
 description: 9. parallel routes を利用して、Page ごとに Headder を変更する
 ---
 import { Aside } from '@astrojs/starlight/components';
+import videoSrc from '../../assets/parallel-routes-magic.mp4';
+
 
 ## Page ごとに Headder を変更する
 
@@ -92,3 +94,22 @@ export default function Header() {
 ```
 
 これで、`http://localhost:3000/sent`にアクセスした場合には、`The Joke Mail Service` が表示されるようになっていると思います。
+
+## parallel routes の仕様について理解する
+
+ここで少し不思議な現象を確認してみましょう。
+
+まず、`http://localhost:3000/inbox` にアクセスしてみてください。
+
+その後、サイドバーから、｀Sent｀ Button クリックして、`http://localhost:3000/sent` にアクセスしてみてください。
+
+すると、Header が `The Joke Mail Service | Inbox` のまま変更されないことを確認できると思います。
+
+また、その場でリロード（または、直接アクセス）すると、Header が `The Joke Mail Service` に変更されることを確認できると思います。
+
+<video src={videoSrc} controls muted loop autoPlay/>
+
+これは parallel routes の仕様です。
+
+ソフト ナビゲーション（Next Link）では、遷移先の URL と一致するサブページ(今回でいうと`@header/sent/page.tsx`)がなくても、現在のサブページを維持して遷移します。
+ハード ナビゲーション(ブラウザーのリロードや直接アクセスされた時) は、 URL と一致するサブページがない場合は、`default.js` が表示されます。`default.js` がない場合は、404 が表示されます。
