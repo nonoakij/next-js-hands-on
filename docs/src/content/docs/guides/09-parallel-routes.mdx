@@ -1,10 +1,6 @@
 ---
 title: 9. parallel routes
 description: 9. parallel routes を利用して、Page ごとに Headder を変更する
-sidebar:
-  badge:
-    text: TODO
-    variant: caution
 ---
 
 ## Page ごとに Headder を変更する
@@ -51,3 +47,23 @@ export default function Header() {
 ```
 
 この時点で、`http://localhost:3000/inbox` にアクセスすると、Header が `The Joke Mail Service | Inbox` に変更されます。
+
+つぎに、`http://localhost:3000/drafts` にアクセスしてみてください。404エラーが表示されると思います。
+
+これは、`@headers` という形で分割された先にPageが存在しないためです。
+
+draftも同様に追加してみましょう。
+
+  
+```bash
+touch apps/workspace/app/(dashboard)/@header/drafts/page.tsx
+```
+
+```tsx
+export default function Header() {
+  return "The Joke Mail Service | Drafts";
+}
+```
+
+これで、`http://localhost:3000/drafts` にアクセスしても、404が表示されなくなったと思います。
+
