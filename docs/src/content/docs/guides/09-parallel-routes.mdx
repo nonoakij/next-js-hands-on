@@ -27,11 +27,12 @@ export default function dashboardLayout(props: {
   children: React.ReactNode;
 +  header: React.ReactNode;
 }) {
-   return (
+  return (
     <main className="relative">
       <div className="p-8 h-dvh">
         <div className="flex items-center justify-between">
           <h1 className="text-4xl font-extrabold tracking-tight">
+-            The Joke Mail Service
 +            {props.header}
           </h1>
           <form action={logout}>
@@ -40,7 +41,8 @@ export default function dashboardLayout(props: {
 次に、`apps/workspace/app/(dashboard)/@header/inbox/page.tsx`を新規で作成します。
   
 ```bash
-touch apps/workspace/app/(dashboard)/@header/inbox/page.tsx
+mkdir -p "apps/workspace/app/(dashboard)/@header/inbox"
+touch "apps/workspace/app/(dashboard)/@header/inbox/page.tsx"
 ```
 
 ```tsx
@@ -51,6 +53,10 @@ export default function Header() {
 
 この時点で、`http://localhost:3000/inbox` にアクセスすると、Header が `The Joke Mail Service | Inbox` に変更されます。
 
+<Aside type="caution">
+  Next.js のバグによってヘッダーが表示されない場合があります。その場合は Next.js を再起動するか、 .next ディレクトリを削除してください。
+</Aside>
+
 つぎに、`http://localhost:3000/drafts` にアクセスしてみてください。404エラーが表示されると思います。
 
 これは、`@headers` という形で分割された先にPageが存在しないためです。
@@ -59,7 +65,8 @@ draftも同様に追加してみましょう。
 
   
 ```bash
-touch apps/workspace/app/(dashboard)/@header/drafts/page.tsx
+mkdir -p "apps/workspace/app/(dashboard)/@header/drafts"
+touch "apps/workspace/app/(dashboard)/@header/drafts/page.tsx"
 ```
 
 ```tsx
@@ -68,7 +75,7 @@ export default function Header() {
 }
 ```
 
-これで、`http://localhost:3000/drafts` にアクセスしても、404が表示されなくなったと思います。
+これで `http://localhost:3000/drafts` にアクセスしても、404が表示されなくなったと思います。
 
 ここで「すべてのページに追加しなければならないのか？」と思うかもしれません。
 
@@ -77,7 +84,7 @@ export default function Header() {
 実際に`default.tsx` を作成してみましょう。
 
 ```bash
-touch apps/workspace/app/(dashboard)/@header/default.tsx
+touch "apps/workspace/app/(dashboard)/@header/default.tsx"
 ```
 
 ```tsx

@@ -11,22 +11,25 @@ import type { MailData } from "@/lib/types";
 import { format } from "date-fns";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { type MouseEvent, useState } from "react";
+import { type MouseEvent, useCallback, useState } from "react";
 
 export function MailViewer(props: { mail: MailData }) {
   const [reply, setReply] = useState("");
   const [dispatch, isLoading] = useAction(formatEmail);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const onClickFormat = async (_: MouseEvent<HTMLButtonElement>) => {
-    setErrorMessage(null);
-    try {
-      const data = await dispatch({ message: props.mail.text, reply });
-      setReply(data.corrected_reply);
-    } catch {
-      setErrorMessage("Failed to format email. Please try again.");
-    }
-  };
+  const handleClickFormat = useCallback(
+    async (_: MouseEvent<HTMLButtonElement>) => {
+      setErrorMessage(null);
+      try {
+        const data = await dispatch({ message: props.mail.text, reply });
+        setReply(data.corrected_reply);
+      } catch {
+        setErrorMessage("Failed to format email. Please try again.");
+      }
+    },
+    [dispatch, props.mail.text, reply],
+  );
 
   return (
     <div className="h-full flex flex-col">
@@ -96,7 +99,7 @@ export function MailViewer(props: { mail: MailData }) {
                   size="sm"
                   className="ml-auto"
                   disabled={isLoading}
-                  onClick={onClickFormat}
+                  onClick={handleClickFormat}
                 >
                   {isLoading ? "Formatting..." : "Format"}
                 </Button>
