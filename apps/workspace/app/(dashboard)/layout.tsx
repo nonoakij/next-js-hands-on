@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 export default function dashboardLayout(props: {
   children: React.ReactNode;
   header: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   return (
     <main className="relative">
@@ -19,7 +18,6 @@ export default function dashboardLayout(props: {
         </div>
         <section className="h-full pt-8">{props.children}</section>
       </div>
-      {props.modal}
     </main>
   );
 }

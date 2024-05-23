@@ -5,27 +5,9 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { File, Inbox, Send } from "lucide-react";
+import { navItems } from "@/lib/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  {
-    title: "Inbox",
-    label: "128",
-    icon: Inbox,
-  },
-  {
-    title: "Drafts",
-    label: "",
-    icon: File,
-  },
-  {
-    title: "Sent",
-    label: "",
-    icon: Send,
-  },
-] as const;
 
 export default function Template(props: { children: React.ReactNode }) {
   const pathname = usePathname();
