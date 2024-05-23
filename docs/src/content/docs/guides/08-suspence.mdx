@@ -2,6 +2,7 @@
 title: 8. Streaming SSR で初回表示を高速化する
 description: 8. Streaming SSR で初回表示を高速化する
 ---
+import { Aside } from '@astrojs/starlight/components';
 import videoSrc from "../../assets/loading.mp4"
 
 ## Inbox の初回表示を高速化する
@@ -60,6 +61,10 @@ export default function InboxPage() {
 ここまで実装が完了したら、`http://localhost:3000/inbox`にアクセスして`Loading...`が表示された後に、メール一覧が表示されることを確認してみましょう。
 
 <video src={videoSrc} controls muted loop autoPlay />
+
+<Aside>
+loading.ts (loading.js) を追加することでも、ローディング画面をカスタマイズすることができます。
+</Aside>
 
 ## まとめ
 

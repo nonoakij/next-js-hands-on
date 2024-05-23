@@ -15,8 +15,8 @@ export async function auth(formData: FormData) {
     Object.fromEntries(formData.entries()),
   );
   if (!parsedFormData.success) {
-+    throw new Error("Invalid form data", { cause:  parsedFormData.error });
--    return parsedFormData.error.formErrors;
+-    throw new Error("Invalid form data", { cause:  parsedFormData.error });
++    return parsedFormData.error.formErrors;
   }
 
 ```
