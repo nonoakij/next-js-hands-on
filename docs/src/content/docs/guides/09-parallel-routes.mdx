@@ -2,6 +2,7 @@
 title: 9. parallel routes
 description: 9. parallel routes を利用して、Page ごとに Headder を変更する
 ---
+import { Aside } from '@astrojs/starlight/components';
 import videoSrc from '../../assets/parallel-routes-magic.mp4';
 
 
@@ -103,5 +104,47 @@ export default function Header() {
 
 これは parallel routes の仕様です。
 
-ソフト ナビゲーション（Next Link）では、遷移先の URL と一致するサブページ(今回でいうと`@header/sent/page.tsx`)がなくても、現在のサブページを維持して遷移します。
-ハード ナビゲーション(ブラウザーのリロードや直接アクセスされた時) は、 URL と一致するサブページがない場合は、`default.js` が表示されます。`default.js` がない場合は、404 が表示されます。
+ソフトナビゲーション（Next Link）では、遷移先の URL と一致するサブページ(今回でいうと`@header/sent/page.tsx`)がなくても、現在のサブページを維持して遷移します。
+
+ハードナビゲーション(ブラウザーのリロードや直接アクセスされた時) では、 URL と一致するサブページがない場合は、`default.js` が表示されます。`default.js` がない場合は、404 が表示されます。
+
+「結局すべてのページに追加しなければならないのか？」と思うかもしれません。
+
+`catch-all route` を使うことで解決することができます。
+
+`catch-all route` は、`[...catchAll]/page.tsx` という形で指定することができます。どれにもマッチしない場合はこのページが表示されます。
+これは、`default.tsx` よりも優先されます。
+
+``` bash
+touch apps/workspace/app/(dashboard)/@header/[...catchAll]/page.tsx
+```
+
+```tsx
+//apps/workspace/app/(dashboard)/@header/[...catchAll]/page.tsx
+export default function Header() {
+  return "The Joke Mail Service";
+}
+```
+
+これで、`http://localhost:3000/sent`にアクセスした場合には、`The Joke Mail Service` が表示されるようになっていると思います。
+
+<Aside>
+`/foo/page.tsx` は、`/foo/@children/page.tsx`であると言えます。
+
+Next.js は、`@children`を暗黙的に追加してくれているとも考えることができます。
+
+このように考えると、`/foo/layout.tsx` で、`props.children` にように、`props.header`が取れることが理解しやすいかなと思います。
+
+```tsx
+export default function dashboardLayout(props: {
+  children: React.ReactNode;
+  header: React.ReactNode;
+}){ ...
+```
+</Aside>
+
+## まとめ
+
+今回は、parallel routes を利用して、Page を分割する方法を紹介しました。
+
+parallel routes を利用することで、Layout をより柔軟に設計することができます。
