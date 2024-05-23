@@ -6,6 +6,7 @@ sidebar:
     text: TODO
     variant: caution
 ---
+import videoSrc from "../../assets/loading.mp4"
 
 ## Inbox の初回表示を高速化する
 
@@ -61,3 +62,10 @@ export default function InboxPage() {
 ```
 
 ここまで実装が完了したら、`http://localhost:3000/inbox`にアクセスして`Loading...`が表示された後に、メール一覧が表示されることを確認してみましょう。
+
+<video src={videoSrc} controls muted loop autoPlay />
+
+## まとめ
+
+このページでは、Streaming SSR を導入することで、初回表示を高速化する方法を学びました。
+TTFBを改善することで、ユーザーのストレスを軽減しUXを向上させることができます。
