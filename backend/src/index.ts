@@ -56,7 +56,6 @@ app
       })
       .parse(await c.req.json());
 
-    // fetch post request to the email formatting service to http://localhost:5555/format_email
     const res = await fetch("http://localhost:5555/format_email", {
       method: "POST",
       headers: {
@@ -64,12 +63,12 @@ app
       },
       body: JSON.stringify(body),
     });
-    const response = z
+    const data = z
       .object({
         corrected_reply: z.string(),
       })
       .parse(await res.json());
-    return c.json(response);
+    return c.json(data);
   });
 
 export default app;
