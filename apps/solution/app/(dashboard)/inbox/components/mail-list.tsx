@@ -43,7 +43,7 @@ const SlowSearchResult = memo(function SlowSearchResult(props: {
 }) {
   const startTime = performance.now();
   while (performance.now() - startTime < 100) {
-    // Do nothing for 80 ms per item to emulate extremely slow code
+    // Do nothing for 100 ms to emulate extremely slow code
   }
   const filteredMailList = props.mailList.filter((item) => {
     return item.name.toLowerCase().includes(props.searchText.toLowerCase());
