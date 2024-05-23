@@ -63,7 +63,11 @@ export default function InboxPage() {
 <video src={videoSrc} controls muted loop autoPlay />
 
 <Aside>
-loading.ts (loading.js) を追加することでも、ローディング画面をカスタマイズすることができます。
+`fallback`以外にも`loading.ts (loading.js)` を追加することでも、ローディング画面をカスタマイズすることができます。
+
+`loading.ts (loading.js)` が存在する場合には、自動的に`fallback` に指定するコンポーネントとして利用されます。
+
+https://nextjs.org/docs/app/api-reference/file-conventions/loading
 </Aside>
 
 ## まとめ
