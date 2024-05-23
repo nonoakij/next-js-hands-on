@@ -6,13 +6,141 @@ sidebar:
     text: TODO
     variant: caution
 ---
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Aside } from '@astrojs/starlight/components';
-import videoSrc from '../../assets/first-page.mov';
+import videoSrc from "../../assets/redirect.mp4"
 
+## 現状の認証情報の確認方法を知る
 
-## なぜLayoutで認証情報を確認してはいけないのか？
+現状でもログアウトしてから `http://localhost:3000/inbox` にアクセスすると、`http://localhost:3000/`にリダイレクトされます。
+
+<video src={videoSrc} controls muted loop autoPlay />
+
+ではこの実装はどこにあるのでしょうか？
+
+現状では、`apps/workspace/app/(detail)/layout.tsx`と`apps/workspace/app/(dashboard)/layout.tsx`の二箇所の`Layout`で同様の実装をして実現しています。
+
+```tsx
+  const cookieStore = cookies()
+  const isAuth = cookieStore.get("___Host-auth")
+  if(!isAuth){
+    redirect("/")
+  }
+```
+
+しかし、この実装では機密情報が漏れる可能性があります。
+これからそれを確認してみましょう。
+
+## curl を使って直接アクセスしてみる
+
+下記のコマンドを実行してみましょう
+
+```bash
+curl --include http://localhost:3000/inbox
+```
+
+すると、出力結果にメールの内容が取得できてしまっていることがわかります。
+
+```bash
+...{\"id\":\"ba54eefd-4097-4949-99f2-2a9ae4d1a836\",\"name\":\"Mia Harris\",
+\"email\":\"miaharris@example.com\",\"subject\":\"Re: Travel Itinerary\",
+\"text\":\"I've received the travel itinerary. It looks great! Thank you
+for your prompt assistance in arranging the details. I've reviewed the 
+schedule and the accommodations, and everything seems to be in order. 
+I'm looking forward to the trip, and I'm confident it'll be a smooth and 
+enjoyable experience.\\n\\nIf there are any specific activities or 
+attractions you recommend at our destination, please feel free to share 
+your suggestions.\\n\\nExcited for the trip! Mia\",\"date\":\"2022-09-10T13:15:00\"
+,\"read\":true,\"labels\":[\"personal\",\"travel\"]},...
+```
+
+詳細の理由については、ページ最下部の参考リンクを参照してください。
+
+## middleware を使って認証情報を確認する
+
+これを防ぐためには、middlewareを使って認証情報を確認するようにしましょう。
+
+まずは、`apps/workspace/app/(detail)/layout.tsx`と`apps/workspace/app/(dashboard)/layout.tsx`の二箇所の`Layout`からリダイレクト処理を削除します。
+
+```diff fomat="tsx"
+// apps/workspace/app/(dashboard)/layout.tsx
+-  const cookieStore = cookies()
+-  const isAuth = cookieStore.get("___Host-auth")
+-  if(!isAuth){
+-    redirect("/")
+-  }
+```
+
+```diff fomat="tsx"
+// apps/workspace/app/(dashboard)/layout.tsx
+-  const cookieStore = cookies()
+-  const isAuth = cookieStore.get("___Host-auth")
+-  if(!isAuth){
+-    redirect("/")
+-  }
+```
+
+次に、middlewareを作成します。
+
+```bash
+touch apps/workspace/middleware.ts
+```
+
+```tsx
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  const isAuth = request.cookies.get("___Host-auth");
+  if (request.nextUrl.pathname.startsWith("/inbox") && !isAuth) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+  if (request.nextUrl.pathname === "/" && isAuth) {
+    return NextResponse.redirect(new URL("/inbox", request.url));
+  }
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
+};
+```
+
+これで Middleware での認証が追加されました。
+もう一度でcurlでリクエストしてみましょう
+
+```bash
+curl --include http://localhost:3000/inbox
+```
+
+すると、下記のように情報が漏洩することなくリダイレクトされることがわかります。
+
+```bash
+HTTP/1.1 307 Temporary Redirect
+location: /
+Date: Thu, XX May 20XX XX:XX:XX GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+/%  
+```
+
+## まとめ
+
+このページでは、Layoutでのリダイレクト処理は、機密情報が漏れる可能性があることを確認しました。
+
+また、middleware を使った認証情報の確認方法を学びました。
+middleware では、認証情報の確認以外でもさまざな用途で利用することができます。
 
 ## 参考リンク
 
-- https://zenn.dev/moozaru/articles/0d6c4596425da9 https://zenn.dev/moozaru/articles/0d6c4596425da9
+- Next.jsのlayout.tsxで認証チェックすると情報漏洩するかも https://zenn.dev/moozaru/articles/0d6c4596425da9 
+- Next.js Docs Middleware https://nextjs.org/docs/app/building-your-application/routing/middleware

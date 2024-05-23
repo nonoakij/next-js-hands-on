@@ -7,13 +7,21 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { navItems } from "@/lib/constants";
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function dashboardLayout(props: {
   children: React.ReactNode;
   header: React.ReactNode;
   modal: React.ReactNode;
 }) {
+  const cookieStore = cookies();
+  const isAuth = cookieStore.get("___Host-auth");
+  if (!isAuth) {
+    redirect("/");
+  }
+
   return (
     <main className="relative">
       <div className="p-8 h-dvh">
