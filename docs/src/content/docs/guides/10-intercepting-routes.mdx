@@ -1,12 +1,132 @@
 ---
-title: 10. intercepting routess
+title: 10. intercepting routes
 description: 10. intercepting routes
-sidebar:
-  badge:
-    text: TODO
-    variant: caution
 ---
+
+import videoSrc from '../../assets/instagram.mp4';
 
 ## intercepting routes を利用して、intagaram like な遷移を実現してみましょう。
 
-、intagaram like な遷移とは下記のようなものです。
+ここでいう、intagaram like な遷移とは下記のようなものです。
+
+<video src={videoSrc} controls muted loop autoPlay/>
+
+1. 一覧ページから詳細のページに遷移する際には、URLを詳細のページに変更しつつ、一覧のページにモーダルのような形で詳細の情報を表示する
+2. 詳細ページに直接アクセスされた場合には、詳細だけのページを表示する
+
+Next.js の 前回の parallel routes とあわせて intercepting routes を利用することで、このような挙動を実現することができます。
+
+## 実装する
+
+まずは、モーダルを表示するために、parallel routes を追加します。
+
+```bash
+mkdir -p "apps/workspace/app/(dashboard)/@modal"
+touch "apps/workspace/app/(dashboard)/@modal/default.tsx"
+```
+
+```tsx
+//apps/workspace/app/(dashboard)/@modal/default.tsx
+export default function Default() {
+  return null;
+}
+```
+
+次に Layout を更新します。
+
+```diff format='tsx'
+//apps/solution/app/(dashboard)/layout.tsx
+
+export default function dashboardLayout(props: {
+  children: React.ReactNode;
+  header: React.ReactNode;
++  modal: React.ReactNode;
+}) {
+```
+
+最後に、intercepting routes を追加してみましょう。
+
+```bash
+mkdir -p "apps/workspace/app/(dashboard)/@modal/(.)inbox/[id]"
+touch "apps/workspace/app/(dashboard)/@modal/(.)inbox/[id]/page.tsx"
+```
+
+```tsx
+//apps/workspace/app/(dashboard)/@modal/(.)inbox/[id]/page.tsx
+import { MailViewer } from "@/components/mail-viewer";
+import type { MailData } from "@/lib/types";
+import Link from "next/link";
+import { Suspense } from "react";
+
+export default function QuickMailViewModal(props: {
+  params: {
+    id: string;
+  };
+}) {
+  return (
+    <>
+      <Link
+        className="absolute inset-0 backdrop-brightness-50 z-modal"
+        href="/inbox"
+      />
+      <div className="absolute right-0 top-0 bottom-0 m-auto bg-white border rounded-l-lg w-3/5 z-modal">
+        <Suspense
+          fallback={<div className="text-center mt-10">Loading...</div>}
+        >
+          <Mail id={props.params.id} />
+        </Suspense>
+      </div>
+    </>
+  );
+}
+
+async function Mail(props: { id: string }) {
+  const res = (await fetch(`http://localhost:8000/inbox/${props.id}`, {
+    cache: "no-cache",
+  }).then((res) => res.json())) as MailData;
+
+  return <MailViewer mail={res} />;
+}
+
+```
+
+これで詳細がモーダルのように表示されるようになりました。
+実際に`http://localhost:3000/inbox`にアクセスして確認してみましょう。
+
+## 仕上げ
+
+実は、このままだとモーダルが閉じません。
+
+戻るボタンやグレーな部分をクリックすると`/inbox`に遷移するようになっています。
+
+URLは変わっていますが、画面は変わっていません。なぜでしょうか？
+
+.
+
+.
+
+.
+
+前回のないようにある通り `parallel routes` がソフトナビゲーションした際に、`/inbox`にマッチするサブページ(@modal/inbox/page.tsx)がないため、サブページとして表示しているモーダルが表示され続けているためです。
+
+仕上げとして、`apps/solution/app/(dashboard)/@modal/inbox/page.tsx` を追加してみましょう。
+
+```bash
+mkdir -p "apps/workspace/app/(dashboard)/@modal/inbox"
+touch "apps/workspace/app/(dashboard)/@modal/inbox/page.tsx"
+```
+
+```tsx
+//apps/workspace/app/(dashboard)/@modal/inbox/page.tsx
+export default function Page() {
+  return null;
+}
+```
+
+これで閉じられるようになりました。
+
+## まとめ
+
+intercepting routes を利用することで、特定のページの遷移を intercept して、違う内容を表示することができます。
+
+また、parallel routes とあわせて利用することで、modal のような挙動を実現することができます。
