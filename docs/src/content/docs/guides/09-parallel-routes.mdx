@@ -155,3 +155,21 @@ export default function dashboardLayout(props: {
 今回は、parallel routes を利用して、Page を分割する方法を紹介しました。
 
 parallel routes を利用することで、Layout をより柔軟に設計することができます。
+
+## Next.js 15 rc
+
+Next.js 15 rc では、`next@rc` を利用することで、parallel routes だけ chatch-all route を採用した場合でも引数を受け取ることができるようになりました。
+
+```bash
+cd apps/solution/
+pnpm install next@rc react@rc react-dom@rc
+cd ../../
+pnpm dev
+```
+
+```tsx
+//apps/solution/app/(dashboard)/@header/[...catchAll]/page.tsx
+export default function Header(props: { params: { catchAll: string[] } }) {
+  return `The Joke Mail Service | ${props.params.catchAll.join(' | ')}`;
+}
+```
