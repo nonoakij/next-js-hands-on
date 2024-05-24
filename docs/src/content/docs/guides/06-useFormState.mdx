@@ -118,9 +118,9 @@ const authSchema = z.object({
 
 ```
 
-次に、`useFormState` を利用する形に`sign-in-form.tsx`を変更してみましょう。
+次に、`useFormState` を利用する形に`sign-up-form.tsx`を変更してみましょう。
 ```diff lang="tsx"
-// apps/workspace/app/components/sign-in-form.tsx
+// apps/workspace/app/components/sign-up-form.tsx
 
 -import { useState } from "react";
 +import { useFormState } from "react-dom";
