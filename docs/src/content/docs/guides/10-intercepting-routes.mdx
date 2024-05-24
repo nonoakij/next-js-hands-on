@@ -42,6 +42,12 @@ export default function dashboardLayout(props: {
   header: React.ReactNode;
 +  modal: React.ReactNode;
 }) {
+
+...
+      {props.modal}
+    </main>
+  );
+}
 ```
 
 最後に、intercepting routes を追加してみましょう。
