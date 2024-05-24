@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import type { MailListData } from "@/lib/types";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import { type ComponentProps, memo, useDeferredValue, useState } from "react";
+import { type ComponentProps, memo, useState } from "react";
 
 export function MailList(props: { mailList: MailListData }) {
   const [searchText, setSearchText] = useState("");
