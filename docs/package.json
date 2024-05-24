@@ -1,17 +1,17 @@
 {
   "name": "@next-js-hands-on/docs",
-  "type": "module",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "astro dev --port $npm_package_config_port",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
     "astro": "astro",
+    "build": "astro check && astro build",
+    "check": "biome check -apply ./*",
+    "dev": "astro dev --port $npm_package_config_port",
     "format": "biome format --write ./*",
     "lint": "biome lint ./*",
-    "check": "biome check -apply ./*"
+    "preview": "astro preview",
+    "start": "astro dev"
   },
   "config": {
     "port": 5050

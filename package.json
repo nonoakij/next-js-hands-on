@@ -2,7 +2,6 @@
   "name": "next-js-hands-on",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["apps/workspace", "apps/solution", "docs"],
   "keywords": [
     "next.js",
     "typescript",
@@ -20,20 +19,27 @@
     "url": "https://github.com/nonoakij/next-js-hands-on"
   },
   "license": "UNLICENSED",
-  "author": "Aki Matsumoto <nonoakij@gmail.com> (https://nonoakij.com)",
+  "author": "nonoakij <nonoakij@gmail.com> (https://nonoakij.com)",
+  "contributors": [
+    {
+      "name": "tosaka07",
+      "email": "tosakaup@gmail.com"
+    }
+  ],
+  "workspaces": ["apps/workspace", "apps/solution", "docs"],
   "scripts": {
-    "preinstall": "lefthook install",
     "build": "pnpm -r run build",
-    "dev": "pnpm -r run dev",
-    "dev:workspace": "pnpm --filter ./apps/workspace run dev",
-    "dev:solution": "pnpm --filter ./apps/solution run dev",
-    "dev:docs": "pnpm --filter ./docs run dev",
-    "dev:backend": "pnpm --filter ./backend run dev",
-    "dev:hands-on": "pnpm --filter ./backend --filter ./apps/workspace --filter run dev",
-    "start": "pnpm -r run start",
-    "format": "pnpm -r run format",
-    "lint": "pnpm -r run lint",
     "check": "pnpm -r run check",
+    "dev": "pnpm -r run dev",
+    "dev:backend": "pnpm --filter ./backend run dev",
+    "dev:docs": "pnpm --filter ./docs run dev",
+    "dev:hands-on": "pnpm --filter ./backend --filter ./apps/workspace --filter run dev",
+    "dev:solution": "pnpm --filter ./apps/solution run dev",
+    "dev:workspace": "pnpm --filter ./apps/workspace run dev",
+    "format": "pnpm -r run format",
+    "preinstall": "lefthook install",
+    "lint": "pnpm -r run lint",
+    "start": "pnpm -r run start",
     "type-check": "pnpm -r run type-check"
   },
   "devDependencies": {
