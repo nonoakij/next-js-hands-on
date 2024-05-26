@@ -29,8 +29,9 @@ sidebar:
 ## cacheの話はしていません。なぜなら変わりそうだから。
 
 [Breaking] Disable automatic fetch caching
-- fetch cache と言ってるので request memoization 周りの話だと思っている。
-コンポーネントでがむしゃらにとってもいい感じに最適化されるぜ！という話がなくなることになる？かも？
+- ~~fetch cache と言ってるので request memoization 周りの話だと思っている。~~
+~~コンポーネントでがむしゃらにとってもいい感じに最適化されるぜ！という話がなくなることになる？かも？~~
+Next.js で fetch したデータをキャッシュしてるのでその話かも？
 https://github.com/vercel/next.js/pull/66004
 - [Breaking] disable client router cache for page segments
 client側で持っているページのキャッシュがなくなるので、revalidate()してたところがなくせてシンプルになる場所があるかも。
@@ -53,3 +54,7 @@ https://github.com/vercel/next.js/pull/66010/files
 
 あった。
 https://nextjs.org/blog/next-15-rc
+
+## useOptimitc について
+
+## Progressive Enhancement について
