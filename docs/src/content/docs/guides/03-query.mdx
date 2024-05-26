@@ -65,6 +65,12 @@ import { Label } from "@/components/ui/label";
 
 ```diff lang="tsx"
 // apps/workspace/components/ui/tabs.tsx
+import { cn } from "@/lib/utils";
++import { usePathname, useRouter, useSearchParams } from "next/navigation";
++import { useCallback } from "react";
+
+const Tabs = TabsPrimitive.Root;
+
 ...
 
 const TabsTrigger = React.forwardRef<

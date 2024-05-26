@@ -178,6 +178,69 @@ const [state, formAction] = useFormState((state, formData) => {
   https://ja.react.dev/reference/react-dom/hooks/useFormStatus
 </Aside>
 
+## チャレンジ💪
+sgin-up, login に成功した時にToastを表示してみましょう。
+
+まずは、Layout に `Toaster` を追加します。
+
+```diff lang="tsx"
+// apps/workspace/app/layout.tsx
+import type { Metadata } from "next";
+import "./globals.css";
++import { Toaster } from "react-dom";
+
+...
+      <body>
+        {children}
++       <Toaster />
+      </body>
+
+```
+
+次に、`action.ts`を変更して、sever action が成功したことがわかるようにします。
+
+```diff lang="tsx"
+// apps/workspace/app/actions.ts
+...
+
+-type State = inferFlattenedErrors<typeof authSchema> | null;
++type State = inferFlattenedErrors<typeof authSchema> | { success: true } | null;
+...
+  if (response.ok) {
+    const result = await response.json();
+    cookies().set("___Host-auth", result.message);
+-    redirect("/inbox");
++    return { success: true };
+  }
+```
+
+最後に、`sign-up-form.tsx` に成功した時にToastを表示するように変更します。
+
+```diff lang="tsx"
+// apps/workspace/app/components/sign-up-form.tsx
+import { Label } from "@/components/ui/label";
++import { toast } from "@/components/ui/use-toast";
++import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+...
+  const [state, formAction] = useFormState(auth, null);
+
++  const router = useRouter();
++  if (state && "success" in state) {
++    toast({
++      description: "登録が完了しました",
++    });
++    router.push("/inbox");
++    return;
++  }
+  
+  return (
+```
+
+同様の修正を `login-form.tsx` にも行ってみましょう。
+ここまでできたら、`http//localhost:3000` にアクセスして、登録、ログインしてみてください。
+toast が表示されるはずです。
+
 ## まとめ
 
 client component を使って、エラーの情報を画面に表示することができます。

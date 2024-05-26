@@ -7,7 +7,7 @@ const authSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
 });
-type State = inferFlattenedErrors<typeof authSchema> | null;
+type State = inferFlattenedErrors<typeof authSchema> | { success: true } | null;
 
 export async function auth(state: State, formData: FormData): Promise<State> {
   const parsedFormData = authSchema.safeParse(
@@ -33,7 +33,7 @@ export async function auth(state: State, formData: FormData): Promise<State> {
   if (response.ok) {
     const result = await response.json();
     cookies().set("___Host-auth", result.message);
-    redirect("/inbox");
+    return { success: true };
   }
   return null;
 }

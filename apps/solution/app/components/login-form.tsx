@@ -4,10 +4,22 @@ import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 
 export function LoginForm() {
   const [state, formAction] = useFormState(auth, null);
+
+  const router = useRouter();
+  if (state && "success" in state) {
+    toast({
+      description: "ログインしました",
+    });
+    router.push("/inbox");
+    return;
+  }
+
   return (
     <form action={formAction}>
       <CardContent className="space-y-2">

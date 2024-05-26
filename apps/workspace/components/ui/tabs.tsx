@@ -4,8 +4,6 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 
 const Tabs = TabsPrimitive.Root;
 
