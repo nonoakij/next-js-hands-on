@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
-    "lefthook": "1.6.12"
+    "lefthook": "1.6.16"
   },
   "volta": {
     "node": "20.14.0"
