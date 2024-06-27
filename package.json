@@ -43,7 +43,7 @@
     "type-check": "pnpm -r run type-check"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.1",
+    "@biomejs/biome": "1.8.3",
     "lefthook": "1.6.18"
   },
   "volta": {
