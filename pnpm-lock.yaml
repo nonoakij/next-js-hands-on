@@ -177,10 +177,10 @@ importers:
     dependencies:
       '@hono/zod-validator':
         specifier: 0.2.2
-        version: 0.2.2(hono@4.4.8)(zod@3.23.8)
+        version: 0.2.2(hono@4.4.9)(zod@3.23.8)
       hono:
-        specifier: 4.4.8
-        version: 4.4.8
+        specifier: 4.4.9
+        version: 4.4.9
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -2205,8 +2205,8 @@ packages:
   hastscript@9.0.0:
     resolution: {integrity: sha512-jzaLBGavEDKHrc5EfFImKN7nZKKBdSLIdGvCwDZ9TfzbF2ffXiov8CKE445L2Z1Ek2t/m4SKQ2j6Ipv7NyUolw==}
 
-  hono@4.4.8:
-    resolution: {integrity: sha512-eewnSgTzdWgFVn97kPV24h+9UVNUQ+9mj6IRxr7dBseTaTBSHtFo/T/vRNcqJkQFysVoXyecflr3Xe/fdvzEpQ==}
+  hono@4.4.9:
+    resolution: {integrity: sha512-VW1hnYipHL/XsnSYiCTLJ+Z7iisZYWwSOiKXm9RBV2NKPxNqjfaHqeMFiDl11fK893ofmErvRpX20+FTNjZIjA==}
     engines: {node: '>=16.0.0'}
 
   html-escaper@3.0.3:
@@ -4196,9 +4196,9 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@hono/zod-validator@0.2.2(hono@4.4.8)(zod@3.23.8)':
+  '@hono/zod-validator@0.2.2(hono@4.4.9)(zod@3.23.8)':
     dependencies:
-      hono: 4.4.8
+      hono: 4.4.9
       zod: 3.23.8
 
   '@img/sharp-darwin-arm64@0.33.4':
@@ -5708,7 +5708,7 @@ snapshots:
       property-information: 6.5.0
       space-separated-tokens: 2.0.2
 
-  hono@4.4.8: {}
+  hono@4.4.9: {}
 
   html-escaper@3.0.3: {}
 
