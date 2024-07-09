@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "@hono/zod-validator": "0.2.2",
-    "hono": "4.4.10",
+    "hono": "4.4.12",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20240620.0",
-    "wrangler": "3.62.0"
+    "wrangler": "3.63.1"
   }
 }
