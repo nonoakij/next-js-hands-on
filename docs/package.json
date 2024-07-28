@@ -17,11 +17,11 @@
     "port": 5050
   },
   "dependencies": {
-    "@astrojs/check": "0.8.2",
-    "@astrojs/starlight": "0.25.1",
-    "astro": "4.11.6",
+    "@astrojs/check": "0.8.3",
+    "@astrojs/starlight": "0.25.2",
+    "astro": "4.12.2",
     "sharp": "0.33.4",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3"
