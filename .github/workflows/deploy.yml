@@ -17,7 +17,7 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Install, build, and upload your site
-        uses: withastro/action@877fd7e5cf5dc5d213f6701c790972aa25452ad3 # v2
+        uses: withastro/action@44cbafd43567733e3b007918c6e0711480560516 # v3
         with:
           path: ./docs
           node-version: 20.13.1
